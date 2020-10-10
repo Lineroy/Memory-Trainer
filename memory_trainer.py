@@ -16,7 +16,7 @@ def cls():
 
 def cls_up_or_down(mtp=10):
     """
-    Make 'umn' step to up or down.
+    Make 'mtp' step to up or down.
     :param mtp:
     :return:
     """
