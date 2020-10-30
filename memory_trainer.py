@@ -2,6 +2,8 @@ from random import randint  # Random number, how we will compare.
 from time import sleep  # Time for think, wait and etc.
 from colorama import init, Fore, Style  # View of program!
 from os import system  # For clearing console.
+from ctypes import windll  # Calculation of the system language, the first process.
+import locale  # Calculation of the system language, the second process.
 
 init(autoreset=True)
 
@@ -21,31 +23,25 @@ def cls_up_or_down(mtp=10):
     :return:
     """
     print("\n" * mtp)
+    
+# Language of the program(Begin);
+windll = windll.kernel32
+windll.GetUserDefaultUILanguage()
 
+if locale.windows_locale[windll.GetUserDefaultUILanguage()] == "ru_UA" or "ru_RU":
+    language = 2
+else:
+    language = 1
 
-how_numbers = "1"
+# Language of the program(End);
 
 # Counter, when we said correct number, when - no.
 counter_True, counter_False = 0, 0
 
-# Language of the program(Begin);
-while True:
-    try:
-        language = int(input("Select language of the program / Выберите язык программы(1, 2):\n"
-                             "\n1) English(Английский);"
-                             "\n2) Русский(Russian)."
-                             "\n>>> "))
-        if language == 1 or 2:
-            break
-
-    except ValueError:
-        pass
-# Language of the program(End);
-
 # Information for use(Begin);
 print(
-    "\nYou must remember the number to be displayed." if language == 1
-    else "\nВы должны запомнить число которое будет выводиться на экран.")
+    "You must remember the number to be displayed." if language == 1
+    else "Вы должны запомнить число которое будет выводиться на экран.")
 sleep(3)
 
 print(
@@ -74,6 +70,8 @@ while True:
     except ValueError:
         pass
 # Question to significant and time(End);
+
+how_numbers = "1"
 
 # Adding numbers to the number we set earlier;
 while len(how_numbers) != how_len_number:
